@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config/dist';
 import { ConfigService } from '@nestjs/config/dist/config.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TrainsModule } from './trains/trains.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AppService } from './app.service';
         synchronize: true,
       }),
     }),
+    TrainsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
