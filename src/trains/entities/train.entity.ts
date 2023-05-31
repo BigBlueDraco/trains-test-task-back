@@ -5,13 +5,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('trains')
 export class Train {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
   @CreateDateColumn()
   createAt: Date;

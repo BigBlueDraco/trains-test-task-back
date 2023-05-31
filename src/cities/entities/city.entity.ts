@@ -1,8 +1,16 @@
 import { Train } from 'src/trains/entities/train.entity';
-import { Column, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+@Entity('cities')
 export class City {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
   @Column()
   name: String;
