@@ -31,6 +31,6 @@ export class Train {
   @JoinColumn()
   @ManyToOne(() => City, (city) => city.arrivingTrains, { onDelete: 'CASCADE' })
   to: City;
-  // @Column()
-  // timeOfDeparting: Date;
+  @Column()
+  timeOfDeparting: Date;
 }

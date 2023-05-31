@@ -9,6 +9,7 @@ import {
   HttpException,
   HttpStatus,
   NotFoundException,
+  Query,
 } from '@nestjs/common';
 import { TrainsService } from './trains.service';
 import { CreateTrainDto } from './dto/create-train.dto';
@@ -28,8 +29,8 @@ export class TrainsController {
   }
 
   @Get()
-  findAll() {
-    return this.trainsService.findAll();
+  findAll(@Query('fromId') fromId: number, @Query('toId') toId: number) {
+    return this.trainsService.findAll({ fromId, toId });
   }
 
   @Get(':id')

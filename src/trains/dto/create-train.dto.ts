@@ -13,7 +13,7 @@ export class CreateTrainDto {
   @IsNumber()
   @IsNotEmpty()
   toId: number;
-  //   @IsDate()
-  //   @IsOptional()
-  //   timeOfDeparting: Date;
+  @IsString()
+  @IsNotEmpty()
+  timeOfDeparting: Date;
 }

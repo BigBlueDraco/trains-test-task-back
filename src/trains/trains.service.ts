@@ -36,7 +36,12 @@ export class TrainsService {
           `Cities with id ${missingCities.join(', ')} not found.`,
         );
       }
-      const train = await this.trainRepository.save(createTrainDto);
+      const { timeOfDeparting, ...rest } = createTrainDto;
+      const date = new Date(timeOfDeparting);
+      const train = await this.trainRepository.save({
+        ...rest,
+        timeOfDeparting: date,
+      });
       return train;
     } catch (err) {
       if (
@@ -48,8 +53,9 @@ export class TrainsService {
     }
   }
 
-  async findAll() {
+  async findAll(where?: { fromId: number; toId: number }) {
     const trains = await this.trainRepository.find({
+      where,
       relations: { from: true, to: true },
     });
     return trains;
@@ -58,6 +64,11 @@ export class TrainsService {
   async findOne(id: number) {
     return await this.trainRepository.findOne({
       where: { id },
+      relations: { from: true, to: true },
+    });
+  }
+  async findByDir(fromId: number, toId: number) {
+    return await this.trainRepository.find({
       relations: { from: true, to: true },
     });
   }
