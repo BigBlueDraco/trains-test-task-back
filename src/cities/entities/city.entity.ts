@@ -1,11 +1,15 @@
 import { Train } from 'src/trains/entities/train.entity';
-import { JoinColumn, ManyToOne } from 'typeorm';
+import { Column, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
 
 export class City {
+  @PrimaryColumn()
+  id: number;
+  @Column()
+  name: String;
   @JoinColumn()
-  @ManyToOne(() => Train, (train) => train.from)
-  departingTrains: Train;
+  @OneToMany(() => Train, (train) => train.from, { nullable: true })
+  departingTrains: Train[];
   @JoinColumn()
-  @ManyToOne(() => Train, (train) => train.to)
-  arrivingTrains: Train;
+  @OneToMany(() => Train, (train) => train.to, { nullable: true })
+  arrivingTrains: Train[];
 }

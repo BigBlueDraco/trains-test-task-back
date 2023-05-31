@@ -4,7 +4,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
@@ -19,11 +18,13 @@ export class Train {
   @UpdateDateColumn()
   updateAt: Date;
   @JoinColumn()
-  @ManyToOne(() => City, (city) => city.departingTrains)
+  @ManyToOne(() => City, (city) => city.departingTrains, {
+    onDelete: 'CASCADE',
+  })
   from: City;
   @JoinColumn()
-  @ManyToOne(() => City, (city) => city.arrivingTrains)
+  @ManyToOne(() => City, (city) => city.arrivingTrains, { onDelete: 'CASCADE' })
   to: City;
   @Column()
-  timeOfDispath: Date;
+  timeOfDeparting: Date;
 }
