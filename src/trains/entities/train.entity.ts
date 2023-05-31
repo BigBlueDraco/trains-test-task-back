@@ -1,7 +1,11 @@
+import { City } from 'src/cities/entities/city.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -14,6 +18,12 @@ export class Train {
   createAt: Date;
   @UpdateDateColumn()
   updateAt: Date;
+  @JoinColumn()
+  @ManyToOne(() => City, (city) => city.departingTrains)
+  from: City;
+  @JoinColumn()
+  @ManyToOne(() => City, (city) => city.arrivingTrains)
+  to: City;
   @Column()
-  From;
+  timeOfDispath: Date;
 }

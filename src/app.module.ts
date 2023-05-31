@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config/dist/config.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TrainsModule } from './trains/trains.module';
+import { CitiesModule } from './cities/cities.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TrainsModule } from './trains/trains.module';
       }),
     }),
     TrainsModule,
+    CitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
