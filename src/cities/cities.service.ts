@@ -17,15 +17,22 @@ export class CitiesService {
   }
 
   async findAll() {
-    const trains = await this.cityRepository.find({
+    const cities = await this.cityRepository.find({
       relations: { departingTrains: true, arrivingTrains: true },
     });
-    return trains;
+    return cities;
   }
 
   async findOne(id: number) {
     return await this.cityRepository.findOne({
       where: { id },
+      relations: { departingTrains: true, arrivingTrains: true },
+    });
+  }
+
+  async findByName(name: string): Promise<City[]> {
+    return await this.cityRepository.find({
+      where: { name },
       relations: { departingTrains: true, arrivingTrains: true },
     });
   }

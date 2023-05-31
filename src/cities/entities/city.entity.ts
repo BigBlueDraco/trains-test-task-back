@@ -13,7 +13,7 @@ export class City {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
-  name: String;
+  name: string;
   @JoinColumn()
   @OneToMany(() => Train, (train) => train.from, { nullable: true })
   departingTrains: Train[];

@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpException,
+  HttpStatus,
+  NotFoundException,
+} from '@nestjs/common';
 import { TrainsService } from './trains.service';
 import { CreateTrainDto } from './dto/create-train.dto';
 import { UpdateTrainDto } from './dto/update-train.dto';
@@ -9,7 +20,11 @@ export class TrainsController {
 
   @Post()
   create(@Body() createTrainDto: CreateTrainDto) {
-    return this.trainsService.create(createTrainDto);
+    try {
+      return this.trainsService.create(createTrainDto);
+    } catch (err) {
+      throw new NotFoundException();
+    }
   }
 
   @Get()

@@ -17,14 +17,20 @@ export class Train {
   createAt: Date;
   @UpdateDateColumn()
   updateAt: Date;
+
+  @Column()
+  fromId: number;
   @JoinColumn()
   @ManyToOne(() => City, (city) => city.departingTrains, {
     onDelete: 'CASCADE',
   })
   from: City;
+
+  @Column()
+  toId: number;
   @JoinColumn()
   @ManyToOne(() => City, (city) => city.arrivingTrains, { onDelete: 'CASCADE' })
   to: City;
-  @Column()
-  timeOfDeparting: Date;
+  // @Column()
+  // timeOfDeparting: Date;
 }
