@@ -23,6 +23,11 @@ export class TrainsService {
       const { fromId, toId } = createTrainDto;
       const from = await this.citiesServices.findOne(fromId);
       const to = await this.citiesServices.findOne(toId);
+      if (fromId == toId) {
+        throw new Error(
+          `The point of departure (fromId: ${fromId}) and the point of arrival (toId: ${toId}) do not have to be the same. `,
+        );
+      }
       if (!from || !to) {
         const missingCities = [];
         if (!from) missingCities.push(fromId);
@@ -34,7 +39,10 @@ export class TrainsService {
       const train = await this.trainRepository.save(createTrainDto);
       return train;
     } catch (err) {
-      if (err.message.includes('Cities')) {
+      if (
+        err.message.includes('The point of departure') ||
+        err.message.includes('Cities')
+      ) {
         throw new HttpException(err.message, HttpStatus.CONFLICT);
       }
     }
