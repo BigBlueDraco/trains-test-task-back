@@ -1,38 +1,156 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Trains-Back
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Це README.md файл, який містить кроки для запуску вашого проєкту.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Початок роботи
 
-## Description
+Переконайтеся, що ви маєте встановлені [Node.js](https://nodejs.org) і [npm](https://www.npmjs.com/).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Крок 1: Встановлення залежностей
 
-## Installation
+Виконайте наступну команду, щоб встановити необхідні залежності:
 
 ```bash
-$ yarn install
+$ npm install
 ```
 
-## Running the app
+### Крок 2: Налаштування бази даних
+
+Створіть базу даних MySQL з назвою `mySQLDB`. Ви можете використовувати будь-який інструмент адміністрування баз даних, такий як [phpMyAdmin](https://www.phpmyadmin.net/) або командний рядок MySQL.
+
+### Крок 3: Налаштування оточення
+
+Створіть файл `.env` у кореневій папці проекту і скопіюйте вміст з файлу `exemple.env`. Відкрийте `.env` файл та вкажіть власні дані конфігурації, такі як ім'я користувача, пароль і назва бази даних, які ви використовуєте.
+
+### Крок 4: Запуск проєкту
+
+Виконайте наступну команду для запуску проєкту:
+
+```bash
+$ npm start
+```
+
+Тепер за замовчуванням ваш проєкт повинен бути доступний за адресою http://localhost:8080. Та якщо ви змінили порт та хост він буде за посиланням що відповідає вашій конфігурації
+
+### Додатково: Використання файлу trainsDump
+
+Якщо ви хочете заповнити базу даних тестовими даними, ви можете використати файл `trainsDump.sql`. Відкрийте файл і виконайте його в своїй базі даних MySQL, використовуючи, наприклад, команду:
+
+```bash
+$ mysql -u [username] -p [database_name] < trainsDump.sql
+```
+
+Це заповнить вашу базу даних зразковими даними для тестування.
+
+## Контролер Cities
+
+### Крок 1: Створення міста
+
+Endpoint: `POST /cities`
+
+Створює нове місто за допомогою наданої інформації. Приймає об'єкт `CreateCityDto` як тіло запиту. Повертає створене місто.
+
+```json
+Request body:
+{
+  "name": "Назва міста",
+}
+```
+
+### Крок 2: Отримання списку міст
+
+Endpoint: GET /cities
+
+Повертає масив усіх міст.
+
+### Крок 3: Отримання міста по id
+
+Endpoint: GET /cities/:id
+
+Отримує деталі конкретного міста за його ідентифікатором id. Повертає об'єкт міста.
+
+### Крок 4: Оновлення міста
+
+Endpoint: PATCH /cities/:id
+
+Оновлює існуюче місто за допомогою наданої інформації. Приймає ідентифікатор міста id та об'єкт як тіло запиту. Повертає оновлене місто.
+
+```json
+Request body:
+{
+  "name": "Назва міста",
+}
+```
+
+### Крок 5: Видалення міста
+
+Endpoint: DELETE /cities/:id
+
+Видаляє місто за його ідентифікатором id. Повертає підтвердження видалення.
+
+## Контролер Trains
+
+### Крок 1: Створення поїзда
+
+Endpoint: `POST /trains`
+
+Створює новий поїзд за допомогою наданої інформації. Приймає об'єкт як тіло запиту де fromId та toId це ідентифікатори міст. Повертає створений поїзд.
+
+```json
+Request body:
+{
+  "name": "Назва поїзда",
+  "fromId": 1,
+  "toId": 2
+}
+```
+
+Зуважте що ідентифікатори точки відправлення та точки прибуття мають бути різні.
+Приклад невірного тіла запиту:
+
+```json
+Request body:
+{
+  "name": "Назва поїзда",
+  "fromId": 2,
+  "toId": 2
+}
+```
+
+### Крок 2: Отримання списку поїздів
+
+Endpoint: GET /trains
+
+Повертає список усіх поїздів. Можна фільтрувати список за допомогою параметрів fromId і toId. Наприклад, /trains?fromId=1&toId=2 поверне список поїздів, які їдуть з міста з ідентифікатором 1 до міста з ідентифікатором 2
+
+### Крок 3: Отримання поїзда по id
+
+Endpoint: GET /trains/:id
+
+Отримує деталі конкретного поїзда за його ідентифікатором id. Повертає об'єкт поїзда.
+
+### Крок 4: Оновлення поїзда
+
+Endpoint: PATCH /trains/:id
+
+Оновлює існуючий поїзд за допомогою наданої інформації. Приймає ідентифікатор поїзда id та об'єкт UpdateTrainDto як тіло запиту. Повертає оновлений поїзд.
+
+```json
+Request body:
+{
+  "name": "Нова назва поїзда",
+  "fromId": 2,
+  "toId": 3
+}
+```
+
+### Крок 5: Видалення поїзда
+
+Endpoint: DELETE /trains/:id
+
+Видаляє поїзд за його ідентифікатором id. Повертає підтвердження видалення.
+
+## NEST running the app
 
 ```bash
 # development
