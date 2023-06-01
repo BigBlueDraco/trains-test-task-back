@@ -34,7 +34,7 @@ $ npm start
 
 ### Додатково: Використання файлу trainsDump
 
-Якщо ви хочете заповнити базу даних тестовими даними, ви можете використати файл `trainsDump.sql`. Відкрийте файл і виконайте його в своїй базі даних MySQL, використовуючи, наприклад, команду:
+Якщо ви хочете заповнити базу даних тестовими даними, ви можете використати файл [`trainsDump.sql`](https://github.com/BigBlueDraco/trains-test-task-back/blob/master/src/db/TrainsDump.sql). Відкрийте файл і виконайте його в своїй базі даних MySQL, використовуючи, наприклад, команду:
 
 ```bash
 $ mysql -u [username] -p [database_name] < trainsDump.sql
