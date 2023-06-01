@@ -1,6 +1,6 @@
 # Trains-Back
 
-Це README.md файл, який містить кроки для запуску вашого проєкту.
+Це README.md файл, який містить кроки для запуску проєкту.
 
 ## Початок роботи
 
@@ -99,7 +99,6 @@ Endpoint: `POST /trains`
 ```json
 Request body:
 {
-  "name": "Назва поїзда",
   "fromId": 1,
   "toId": 2
 }
@@ -111,7 +110,6 @@ Request body:
 ```json
 Request body:
 {
-  "name": "Назва поїзда",
   "fromId": 2,
   "toId": 2
 }
@@ -138,7 +136,6 @@ Endpoint: PATCH /trains/:id
 ```json
 Request body:
 {
-  "name": "Нова назва поїзда",
   "fromId": 2,
   "toId": 3
 }
