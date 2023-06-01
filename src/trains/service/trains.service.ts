@@ -4,12 +4,12 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateTrainDto } from './dto/create-train.dto';
-import { UpdateTrainDto } from './dto/update-train.dto';
+import { CreateTrainDto } from '../dto/create-train.dto';
+import { UpdateTrainDto } from '../dto/update-train.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Train } from './entities/train.entity';
+import { Train } from '../entities/train.entity';
 import { Repository } from 'typeorm';
-import { CitiesService } from 'src/cities/cities.service';
+import { CitiesService } from 'src/cities/service/cities.service';
 
 @Injectable()
 export class TrainsService {
@@ -18,7 +18,7 @@ export class TrainsService {
     private readonly trainRepository: Repository<Train>,
     private readonly citiesServices: CitiesService,
   ) {}
-  async create(createTrainDto: CreateTrainDto) {
+  async create(createTrainDto: CreateTrainDto): Promise<Train> {
     try {
       const { fromId, toId } = createTrainDto;
       const from = await this.citiesServices.findOne(fromId);
@@ -53,7 +53,7 @@ export class TrainsService {
     }
   }
 
-  async findAll(where?: { fromId: number; toId: number }) {
+  async findAll(where?: { fromId: number; toId: number }): Promise<Train[]> {
     const trains = await this.trainRepository.find({
       where,
       relations: { from: true, to: true },
@@ -61,24 +61,19 @@ export class TrainsService {
     return trains;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Train> {
     return await this.trainRepository.findOne({
       where: { id },
       relations: { from: true, to: true },
     });
   }
-  async findByDir(fromId: number, toId: number) {
-    return await this.trainRepository.find({
-      relations: { from: true, to: true },
-    });
-  }
 
-  async update(id: number, updateTrainDto: UpdateTrainDto) {
+  async update(id: number, updateTrainDto: UpdateTrainDto): Promise<Train> {
     await this.trainRepository.update(id, updateTrainDto);
-    return this.findOne(id);
+    return await this.findOne(id);
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<Train> {
     const train = await this.findOne(id);
     await this.trainRepository.delete(id);
     return train;

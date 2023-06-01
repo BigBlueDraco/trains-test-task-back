@@ -11,9 +11,9 @@ import {
   NotFoundException,
   Query,
 } from '@nestjs/common';
-import { TrainsService } from './trains.service';
-import { CreateTrainDto } from './dto/create-train.dto';
-import { UpdateTrainDto } from './dto/update-train.dto';
+import { TrainsService } from '../service/trains.service';
+import { CreateTrainDto } from '../dto/create-train.dto';
+import { UpdateTrainDto } from '../dto/update-train.dto';
 
 @Controller('trains')
 export class TrainsController {

@@ -7,9 +7,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CitiesService } from './cities.service';
-import { CreateCityDto } from './dto/create-city.dto';
-import { UpdateCityDto } from './dto/update-city.dto';
+import { CitiesService } from '../service/cities.service';
+import { CreateCityDto } from '../dto/create-city.dto';
+import { UpdateCityDto } from '../dto/update-city.dto';
 
 @Controller('cities')
 export class CitiesController {
